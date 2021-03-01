@@ -4,69 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notepad</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body onload="load_text()">
-    <FORM NAME="controls" ID="controls">
-        
-        <SELECT style="WIDTH: 310px">
-        
-        <OPTION selected>Fonts</OPTION>
-      
-        <OPTION>Arial Black</OPTION>
-        
-        </SELECT>
-        
-        <INPUT id="button1" type="button" value="B" name="button1" style="FONT-WEIGHT: bold; WIDTH: 26px; HEIGHT: 24px" size="28" onclick="bold_click()">
-        
-        <INPUT type="button" value="I" style="WIDTH: 25px; FONT-STYLE: italic; HEIGHT: 24px" size="30" onclick="italic_click()">
-        
-        <INPUT id="button1" style="WIDTH: 26px; HEIGHT: 24px; TEXT-DECORATION: underline" type="button" size="8" value="U" name="button1" onclick="underline_click()">
-        
-        <INPUT id="button1" style="WIDTH: 26px; HEIGHT: 24px;" type="button" size="8" value="N" name="button1" onclick="normal_click()">
-        
-        <BR/><TEXTAREA style="WIDTH: 399px; HEIGHT: 182px" id="output" name="output" rows="9" wrap="virtual" cols=48></TEXTAREA><BR>
-        
-        <P align="center"><INPUT TYPE="reset" VALUE="Clear"></P>
-        
-        </FORM>
-         
-        
-    <script>
-        
-        function load_text(){
-        
-        document.getElementById("output").value = "Text....";
-       
-        }
-        
-        function bold_click(){
-        
-        document.getElementById("output").style.fontWeight = "bold";
-        
-        }
-       
-        function underline_click(){
-        
-        document.getElementById("output").style.textDecoration = "Underline";
-        
-        }
-       
-        function italic_click(){
+<body>
+    <h2>Notepad</h2>
+    <h3>Tools:</h3>
+    <div class="setup">
+        <select class="look" onchange="changeFont(this)">
+            <option value="Arial">Arial</option>
+            <option value="Sans Serif">Sans Serif</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Times New Romans">Times New Romans</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="Impact">Impact</option>
+            <option value="Bookman">Bookman</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Palatino">Palatino</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Montserat">Montserat</option>
+        </select>
+        <select class="size" onchange="changeSize(this)">
+            <option value="8">8</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+            <option value="28">28</option>
+            <option value="30">30</option>
+            <option value="32">32</option>
+            <option value="34">34</option>
+            <option value="36">36</option>
+            <option value="38">38</option>
+            <option value="40">40</option>
+            <option value="42">42</option>
+            <option value="44">44</option>
+            <option value="46">46</option>
+        </select>
+        <input type="button" value="Bold" class="upper" onclick="Bold()">
+        <input type="button" value="Italic" class="upper" onclick="italic()">
+        <input type="button" value="Underline" class="upper" onclick="underline()">
+        <br><br>
 
-        document.getElementById("output").style.fontStyle = "Italic";
-        
+        <textarea placeholder="Enter your text here" id="content" cols="100" rows="20"></textarea>
+
+        <input type="reset" value="Clear" onclick="remove()">
+        <input type="button" value="Reset" class="normal" onclick="reset()">
+    </div>
+
+    <script>
+        function changeFont(font) {
+            document.getElementById('content').style.fontFamily=font.value;
         }
-        
-        function normal_click(){
-        
-        document.getElementById("output").style.fontStyle = "Normal";
-        
-        document.getElementById("output").style.textDecoration = "None";
-        
-        document.getElementById("output").style.fontWeight = "Normal";
-        
+        function changeSize(n) {
+            var s = document.getElementById('content');
+            s.style.fontSize=n.value+'px';
         }
-        
-        </script>
+        function Bold() {
+            var bol = document.getElementById('content').style.fontWeight;
+             if(bol=='normal') {
+                document.getElementById('content').style.fontWeight = 'bold';
+             }
+             else {
+                document.getElementById('content').style.fontWeight = 'normal';
+             }
+             
+        }
+        function italic() {
+            var ital = document.getElementById('content').style.fontStyle;
+             if(ital=='normal') {
+                document.getElementById('content').style.fontStyle = 'italic';
+             }
+             else {
+                document.getElementById('content').style.fontStyle = 'normal';
+             }
+             
+        }
+        function underline() {
+            var under = document.getElementById('content').style.textDecoration;
+             if(under!=='underline') {
+                document.getElementById('content').style.textDecoration = 'underline';
+             }
+             else {
+                document.getElementById('content').style.textDecoration = 'none';
+             }
+             
+        }
+        function reset() {
+            document.getElementById('content').style.fontStyle = 'normal'; 
+            document.getElementById('content').style.textDecoration = 'none';
+            document.getElementById('content').style.fontWeight = 'normal';
+        }
+        function remove() {
+            document.getElementById('content').value = "";
+        }
+    </script>
 </body>
 </html>
